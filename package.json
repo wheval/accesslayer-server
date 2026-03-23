@@ -1,5 +1,5 @@
 {
-   "name": "eth-enugu-backend",
+   "name": "accesslayer-server",
    "packageManager": "pnpm@10.6.5",
    "scripts": {
       "dev": "nodemon",
@@ -9,12 +9,23 @@
       "format:check": "prettier --check .",
       "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
       "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
+      "check": "pnpm lint && pnpm build",
+      "prepare": "husky",
+      "lint-staged": "lint-staged",
       "generate": "pnpm exec prisma generate",
       "migrate": "pnpm exec prisma migrate dev",
       "studio": "pnpm exec prisma studio",
       "validate-api": "tspec validate",
       "bundle": "bash src/scripts/bundle-code.sh",
       "seed:reports": "ts-node src/scripts/seed-reports.ts"
+   },
+   "lint-staged": {
+      "*.{js,jsx,ts,tsx}": [
+         "eslint --fix"
+      ],
+      "*.{json,md,yml,yaml}": [
+         "prettier --write"
+      ]
    },
    "prisma": {
       "schema": "./prisma/schema"
@@ -68,6 +79,8 @@
       "@typescript-eslint/eslint-plugin": "^8.32.0",
       "@typescript-eslint/parser": "^8.32.0",
       "eslint": "^9.26.0",
+      "husky": "^9.1.7",
+      "lint-staged": "^15.5.2",
       "nodemon": "^3.1.10",
       "prettier": "^3.6.2",
       "ts-node": "^10.9.2",

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+   - name: Contribution Guide
+     url: https://github.com/accesslayerorg/accesslayer-server/blob/main/CONTRIBUTING.md
+     about: Read the backend setup, verification commands, and PR workflow.
+   - name: Issue Backlog
+     url: https://github.com/accesslayerorg/accesslayer-server/blob/main/docs/open-source/issue-backlog.md
+     about: Browse the server sections and scoped maintainer-ready issue inventory.
+   - name: Security Policy
+     url: https://github.com/accesslayerorg/accesslayer-server/blob/main/SECURITY.md
+     about: Report security issues privately instead of opening public tickets.

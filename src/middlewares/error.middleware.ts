@@ -19,7 +19,7 @@ export class ApiError extends Error {
 
 export const notFoundHandler = (
    req: Request,
-   res: Response,
+   _res: Response,
    next: NextFunction
 ) => {
    const error = new ApiError(
@@ -30,8 +30,8 @@ export const notFoundHandler = (
 };
 
 export const temporarilyDisabled = (
-   req: Request,
-   res: Response,
+   _req: Request,
+   _res: Response,
    next: NextFunction
 ) => {
    const error = new ApiError(503, `This endpoint is temporarily disabled`);
@@ -43,7 +43,7 @@ export const errorHandler: ErrorRequestHandler = (
    err: any,
    req: Request,
    res: Response,
-   next: NextFunction
+   _next: NextFunction
 ): void => {
    // Log error details
    console.error('🚨 Error caught by global handler:');

@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a backend or API bug in Access Layer server.
+title: '[Bug]: '
+labels:
+   - bug
+body:
+   - type: dropdown
+     id: area
+     attributes:
+        label: Area
+        options:
+           - API and routing
+           - auth and sessions
+           - indexing and background logic
+           - data layer and Prisma
+           - observability and developer experience
+     validations:
+        required: true
+   - type: textarea
+     id: summary
+     attributes:
+        label: Summary
+        description: Describe the bug and the expected behavior.
+     validations:
+        required: true
+   - type: textarea
+     id: reproduction
+     attributes:
+        label: Reproduction
+        description: Include request, payload, environment, and logs when relevant.
+     validations:
+        required: true
+   - type: textarea
+     id: impact
+     attributes:
+        label: Impact
+        description: Explain who is affected and whether this blocks contributors or users.

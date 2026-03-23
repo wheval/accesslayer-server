@@ -597,7 +597,7 @@ export function isInstructor(user: User): boolean {
 }
 
 // Everyone is a student by default
-export function isStudent(user: User): boolean {
+export function isStudent(_user: User): boolean {
   return true; // studentProfile always exists
 }
 
@@ -614,7 +614,7 @@ export function getUserCapabilities(user: User): UserCapabilities {
 
 // Get user display name
 export function getUserDisplayName(user: User): string {
-  return `\${user.firstName} \${user.lastName}\`;
+  return `${user.firstName} ${user.lastName}`;
 }
 
 // Get user roles as array (for UI)

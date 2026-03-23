@@ -5,7 +5,6 @@ import { envConfig } from '../config';
 // See: https://www.prisma.io/docs/guides/performance-and-optimization/connection-management
 
 declare global {
-   // eslint-disable-next-line no-var
    var prisma: PrismaClient | undefined;
 }
 

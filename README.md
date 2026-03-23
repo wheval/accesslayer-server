@@ -1,12 +1,12 @@
 # Access Layer Server
 
-This folder contains the backend API for Access Layer.
+This repository contains the backend API for Access Layer.
 
-The server is the off-chain layer for the product. It should handle the parts of the marketplace that do not need to live inside Stellar smart contracts, while coordinating with the client and contracts as the product grows.
+The server is the off-chain layer for the product. It handles the parts of the marketplace that do not need to live inside Stellar smart contracts, while coordinating with the client and contracts as the product grows.
 
 ## Purpose
 
-The server will be responsible for:
+The server is responsible for:
 
 - creator and user profile management
 - auth and session-related flows
@@ -27,37 +27,27 @@ The server will be responsible for:
 
 - Express app bootstrap exists in [src/app.ts](./src/app.ts)
 - common backend middleware is already scaffolded
-- the codebase still contains template-era modules and labels that should be adapted to Access Layer over time
+- some template-era modules and labels still need to be adapted to Access Layer
 
-## API direction
-
-As Access Layer evolves, the server will likely expose endpoints for:
-
-- creators
-- wallets
-- key ownership summaries
-- gated resources
-- activity feeds
-- admin or moderation tools
-
-## Environment
-
-Typical variables expected by the server include:
-
-```env
-DATABASE_URL=
-PORT=3000
-NODE_ENV=development
-```
-
-Additional mail, auth, and third-party variables may be required depending on which modules remain from the template and which are replaced.
-
-## Commands
+## Local setup
 
 ```bash
-npm install
-npm run dev
+pnpm install
+cp .env.example .env
+pnpm exec prisma generate
+pnpm dev
 ```
 
-If the template already provides build or lint scripts, you can run them in this folder as needed.
+## Verification
 
+```bash
+pnpm lint
+pnpm build
+```
+
+## Open source workflow
+
+- Read [CONTRIBUTING.md](./CONTRIBUTING.md) before starting work.
+- Browse the maintainer issue inventory in [docs/open-source/issue-backlog.md](./docs/open-source/issue-backlog.md).
+- Review [SECURITY.md](./SECURITY.md) before reporting vulnerabilities.
+- Use the issue templates in [`.github/ISSUE_TEMPLATE`](./.github/ISSUE_TEMPLATE) for new scoped work.
