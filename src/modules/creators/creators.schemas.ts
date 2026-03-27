@@ -5,11 +5,10 @@ import {
 } from './creators.sort';
 import { safeIntParam } from '../../utils/query.utils';
 import {
-   DEFAULT_PAGE_SIZE,
-   DEFAULT_OFFSET,
    MIN_PAGE_SIZE,
    MAX_PAGE_SIZE,
 } from '../../constants/pagination.constants';
+import { PUBLIC_OFFSET_PAGINATION_DEFAULTS } from '../../utils/public-list-query-defaults';
 
 /**
  * Validation schema for creator list query parameters.
@@ -23,13 +22,13 @@ import {
 export const CreatorListQuerySchema = z.object({
    // Pagination
    limit: safeIntParam({
-      defaultValue: DEFAULT_PAGE_SIZE,
+      defaultValue: PUBLIC_OFFSET_PAGINATION_DEFAULTS.limit,
       min: MIN_PAGE_SIZE,
       max: MAX_PAGE_SIZE,
       label: 'Limit',
    }),
    offset: safeIntParam({
-      defaultValue: DEFAULT_OFFSET,
+      defaultValue: PUBLIC_OFFSET_PAGINATION_DEFAULTS.offset,
       min: 0,
       max: Number.MAX_SAFE_INTEGER,
       label: 'Offset',
