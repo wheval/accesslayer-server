@@ -1,6 +1,8 @@
 import { prisma } from '../../utils/prisma.utils';
 import { CreatorProfile } from '../../types/profile.types';
 import { CreatorListQueryType } from './creators.schemas';
+import { mapCreatorListSort } from './creators.sort';
+import { CreatorListResponse } from './creators.serializers';
 
 type CreatorListWhere = {
    isVerified?: boolean;
@@ -35,8 +37,7 @@ export async function fetchCreatorList(
       ];
    }
 
-   // Build order by clause
-   const orderBy = { [sort]: order };
+   const orderBy = mapCreatorListSort(sort, order);
 
    // Fetch creators and total count in parallel
    const [creators, total] = await Promise.all([
@@ -50,4 +51,31 @@ export async function fetchCreatorList(
    ]);
 
    return [creators as CreatorProfile[], total];
+}
+
+/**
+ * Creates a consistent empty response for creator list endpoints.
+ *
+ * Ensures empty list responses maintain the same shape as paginated responses,
+ * allowing clients to rely on consistent structure even when no data exists.
+ *
+ * @param query - Validated query parameters used for the request
+ * @returns Empty creator list response with proper pagination metadata
+ *
+ * @example
+ * const emptyResponse = createEmptyCreatorListResponse(validatedQuery);
+ * // Returns: { creators: [], pagination: { limit, offset, total: 0, hasMore: false } }
+ */
+export function createEmptyCreatorListResponse(
+   query: CreatorListQueryType
+): CreatorListResponse {
+   return {
+      creators: [],
+      pagination: {
+         limit: query.limit,
+         offset: query.offset,
+         total: 0,
+         hasMore: false,
+      },
+   };
 }

@@ -1,4 +1,15 @@
 import { z } from 'zod';
+import {
+   CREATOR_LIST_SORT_OPTIONS,
+   CREATOR_LIST_SORT_ORDERS,
+} from './creators.sort';
+import { safeIntParam } from '../../utils/query.utils';
+import {
+   DEFAULT_PAGE_SIZE,
+   DEFAULT_OFFSET,
+   MIN_PAGE_SIZE,
+   MAX_PAGE_SIZE,
+} from '../../constants/pagination.constants';
 
 /**
  * Validation schema for creator list query parameters.
@@ -11,29 +22,22 @@ import { z } from 'zod';
  */
 export const CreatorListQuerySchema = z.object({
    // Pagination
-   limit: z
-      .string()
-      .optional()
-      .default('20')
-      .transform(val => parseInt(val, 10))
-      .refine(val => val > 0 && val <= 100, {
-         message: 'Limit must be between 1 and 100',
-      }),
-   offset: z
-      .string()
-      .optional()
-      .default('0')
-      .transform(val => parseInt(val, 10))
-      .refine(val => val >= 0, {
-         message: 'Offset must be non-negative',
-      }),
+   limit: safeIntParam({
+      defaultValue: DEFAULT_PAGE_SIZE,
+      min: MIN_PAGE_SIZE,
+      max: MAX_PAGE_SIZE,
+      label: 'Limit',
+   }),
+   offset: safeIntParam({
+      defaultValue: DEFAULT_OFFSET,
+      min: 0,
+      max: Number.MAX_SAFE_INTEGER,
+      label: 'Offset',
+   }),
 
    // Sorting
-   sort: z
-      .enum(['createdAt', 'updatedAt', 'displayName', 'handle'])
-      .optional()
-      .default('createdAt'),
-   order: z.enum(['asc', 'desc']).optional().default('desc'),
+   sort: z.enum(CREATOR_LIST_SORT_OPTIONS).optional().default('createdAt'),
+   order: z.enum(CREATOR_LIST_SORT_ORDERS).optional().default('desc'),
 
    // Filters
    verified: z
